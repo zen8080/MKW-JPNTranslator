@@ -9,6 +9,18 @@ const dictionaryEN = {
   war: "対抗戦",
   shell: "甲羅",
   kart: "カート",
+  bagger: "バガー",
+  fib: "偽ボックス",
+  tc: "雲",
+  blooper: "イカ",
+  mega: "巨大",
+  bill: "キラー",
+  pulled: "引いた",
+  activate: "打った",
+  thowing: "投げ",
+  opponents: "相手",
+  dodge: "回避",
+  dogeable: "無敵"
 };
 
 const dictionaryJA = {
@@ -19,6 +31,19 @@ const dictionaryJA = {
   対抗戦: "war",
   甲羅: "shell",
   カート: "kart",
+  バガー: "bagger",
+  偽ボックス: "fib",
+  雲: "tc",
+  イカ: "blooper",
+  巨大: "mega",
+  キラー: "bill",
+  引いた: "pulled",
+  打った: "activate",
+  投げ: "thowing",
+  相手: "opponents",
+  回避: "dodge",
+  無敵: "dogeable",
+  サンダー引いた: "i have shock",
 };
 
 function escapeRegExp(str) {
