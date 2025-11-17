@@ -11,10 +11,15 @@ const dictionaryEN = {
   kart: "カート",
 };
 
-// 日本語→英語辞書は英語辞書を反転して作る（必要なら手動で追加してください）
-const dictionaryJA = Object.fromEntries(
-  Object.entries(dictionaryEN).map(([k, v]) => [v, k])
-);
+const dictionaryJA = {
+  サンダー: "shock",
+  キノコ: "shroom",
+  棘: "blue",
+  SC: "cut",
+  対抗戦: "war",
+  甲羅: "shell",
+  カート: "kart",
+};
 
 function escapeRegExp(str) {
   return str.replace(/[.*+?^${}()|[\\]\\]/g, "\\$&");
@@ -47,7 +52,7 @@ export default function App() {
   const handleTranslate = async () => {
     setLoading(true);
     try {
-      const preProcessed = applyDict(input);
+      const preProcessed = applyDict(input, direction);
       const [src, tgt] = direction.split("-");
       const result = await translateText(preProcessed, { source: src, target: tgt });
       setOutput(result);
@@ -64,7 +69,7 @@ export default function App() {
       <textarea
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        placeholder="英語の文章を入力"
+        placeholder={direction === "EN-JA" ? "英語の文章を入力" : "日本語の文章を入力"}
       />
 
         <div className="controls">
