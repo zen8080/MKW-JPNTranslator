@@ -1,33 +1,39 @@
 import React, { useState } from "react";
 import { translateText } from "./api";
 
-const dictionary = {
+const dictionaryEN = {
   shock: "サンダー",
   shroom: "キノコ",
   blue: "棘",
   cut: "SC",
   war: "対抗戦",
   shell: "甲羅",
-  kart: "かーと",
-  サンダー: "shock",
-  キノコ: "shroom",
-  棘: "blue",
-  SC: "cut",
-  対抗戦: "war",
-  甲羅: "shell",
-  カート: "kart",
+  kart: "カート",
 };
+
+// 日本語→英語辞書は英語辞書を反転して作る（必要なら手動で追加してください）
+const dictionaryJA = Object.fromEntries(
+  Object.entries(dictionaryEN).map(([k, v]) => [v, k])
+);
 
 function escapeRegExp(str) {
   return str.replace(/[.*+?^${}()|[\\]\\]/g, "\\$&");
 }
 
-function applyDict(text) {
+function applyDict(text, direction = "EN-JA") {
   let out = text;
-  const keys = Object.keys(dictionary).sort((a, b) => b.length - a.length);
+  const dict = direction === "JA-EN" ? dictionaryJA : dictionaryEN;
+  const keys = Object.keys(dict).sort((a, b) => b.length - a.length);
   for (const k of keys) {
-    const pattern = new RegExp("\\b" + escapeRegExp(k) + "\\b", "gi");
-    out = out.replace(pattern, dictionary[k]);
+    let pattern;
+    if (direction === "JA-EN") {
+      // 日本語は単語境界が使えないため、単純な部分一致で置換（グローバル・大文字小文字区別なしは不要）
+      pattern = new RegExp(escapeRegExp(k), "g");
+    } else {
+      // 英語は単語境界を使って正確に置換
+      pattern = new RegExp("\\b" + escapeRegExp(k) + "\\b", "gi");
+    }
+    out = out.replace(pattern, dict[k]);
   }
   return out;
 }
