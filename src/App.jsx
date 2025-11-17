@@ -8,6 +8,14 @@ const dictionary = {
   cut: "SC",
   war: "対抗戦",
   shell: "甲羅",
+  kart: "かーと",
+  サンダー: "shock",
+  キノコ: "shroom",
+  棘: "blue",
+  SC: "cut",
+  対抗戦: "war",
+  甲羅: "shell",
+  カート: "kart",
 };
 
 function escapeRegExp(str) {
